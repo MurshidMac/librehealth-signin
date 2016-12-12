@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="../css/main.css">
+    <link href="../bower_components/polymer/polymer.html" rel="import">
+    <link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
+    <link href="../bower_components/paper-material/paper-material.html" rel="import">	
+    <link href="../bower_components/paper-input/paper-input.html" rel="import">
+    <link href="../bower_components/paper-button/paper-button.html" rel="import">
+    <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+    <script src="../js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="../js/main.js"></script>
+    
+        
+
+</head>
+
+<dom-module id="librehealth-login-page">
+ 
+    <template>
+        <button onclick="showPanel()" style="width:auto;">Login</button>
+
+        <div id="loginFormDiv" class="loginPanel">
+
+            <form id="loginForm" class="loginPanel-content animate" action="action_page.php">
+
+                <div class="imgcontainer">
+                    <span onclick="resetAndCloseForm()" class="close" title="Close Panel">&times;</span>
+                    <img id="logo" src="../img/logo.png" alt="LibreHealth logo">
+                </div>
+
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" id="uname" name="uname" required>
+
+                    <label><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+
+                    <div>
+                        <button onclick="login()">Login</button>
+                        <button type="button" onclick="resetAndCloseForm()" class="cancelbtn">Cancel</button>
+                    </div>
+                    <div class="container" style="background-color:#f1f1f1">
+                        <input type="checkbox" checked="checked"> Remember me
+                        <span class="psw">Forgot <a href="#">password?</a></span>
+                    </div>
+                </div>
+          </form>
+        </div>
+    </template>
+</dom-module>
+
+<script>
+  // element registration
+  Polymer({
+    is: "librehealth-login-page",
+
+	ready: function(e){
+		
+	}
+  });
+  
+  function clearInput(id) {
+      document.getElementById(id).value = '';
+    }
+</script>
