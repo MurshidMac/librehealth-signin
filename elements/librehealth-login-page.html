@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html>
 <head>
+    <title>Librehealth Login Page </title>
     <link rel="stylesheet" href="../css/main.css">
     <link href="../bower_components/polymer/polymer.html" rel="import">
-    <link href="../bower_components/paper-icon-button/paper-icon-button.html" rel="import">
-    <link href="../bower_components/paper-material/paper-material.html" rel="import">	
-    <link href="../bower_components/paper-input/paper-input.html" rel="import">
-    <link href="../bower_components/paper-button/paper-button.html" rel="import">
-    <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
     <script src="../js/vendor/jquery-2.1.4.min.js"></script>
     <script src="../js/main.js"></script>
-    
-        
-
 </head>
 
 <dom-module id="librehealth-login-page">
- 
+
     <template>
-        <button onclick="showPanel()" style="width:auto;">Login</button>
+        <span id="welcomeUser"></span>
+        <a on-click="loginorlogout">
+            <span id="authenticationLabel"></span>
+            <i class="icon-signout small"></i>
+        </a>
 
-        <div id="loginFormDiv" class="loginPanel">
+        <div id="loginFormDiv" class="loginPanel ">
 
-            <form id="loginForm" class="loginPanel-content animate" action="action_page.php">
+            <form id="loginForm" class="loginPanel-content animate">
 
                 <div class="imgcontainer">
                     <span onclick="resetAndCloseForm()" class="close" title="Close Panel">&times;</span>
@@ -35,17 +30,16 @@
 
                     <label><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" id="psw" name="psw" required>
+                    <span id="errorMsg" style="color:red"></span>
 
                     <div>
-                        <button onclick="login()">Login</button>
-                        <button type="button" onclick="resetAndCloseForm()" class="cancelbtn">Cancel</button>
+                        <button on-click="handleClick">Login</button>
                     </div>
                     <div class="container" style="background-color:#f1f1f1">
                         <input type="checkbox" checked="checked"> Remember me
-                        <span class="psw">Forgot <a href="#">password?</a></span>
                     </div>
                 </div>
-          </form>
+            </form>
         </div>
     </template>
 </dom-module>
@@ -54,13 +48,22 @@
   // element registration
   Polymer({
     is: "librehealth-login-page",
-
-	ready: function(e){
-		
-	}
-  });
-  
-  function clearInput(id) {
-      document.getElementById(id).value = '';
+    loginorlogout: function ()
+    {
+        if (sessionStorage.getItem("authentication") === "true")
+        {
+            logout();
+        }
+        else
+        {
+            showPanel();
+        }
+    },
+    properties: {
+      onLoginRedirectUrl: String
+    },
+    handleClick: function(e) {
+      login(this.onLoginRedirectUrl);
     }
+  });
 </script>
