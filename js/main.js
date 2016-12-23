@@ -66,7 +66,7 @@ function resetAndCloseForm() {
 }
 
 function login(onLoginRedirectUrl) {
-    
+    $("#errorMsg").text("");
     var username = $("input#uname").val();
     var password = $("input#psw").val();
     if(username !== "" && password !== "") {
@@ -82,7 +82,6 @@ function login(onLoginRedirectUrl) {
             success: function (data){
                 if(data.authenticated)
                 {
-                    $("#errorMsg").text("");
                     sessionStorage.setItem("authentication", data.authenticated);
                     setAuthenticationLabel(data);
                     window.location.href = onLoginRedirectUrl;
